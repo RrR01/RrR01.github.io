@@ -1,7 +1,6 @@
 let c = document.getElementById("my-canvas");
 let ctx = c.getContext("2d");
 
-let space_bar = 32;
 let backgroundImg = document.createElement("img");
 
 backgroundImg.onload = () => {
@@ -26,7 +25,6 @@ let frames = {
   punch: [1, 2, 3, 4, 5, 6, 7],
   backward: [1, 2, 3, 4, 5, 6],
   forward: [1, 2, 3, 4, 5, 6],
-  block: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 };
 
 let loadImages = (callback) => {
@@ -36,11 +34,10 @@ let loadImages = (callback) => {
     punch: [],
     backward: [],
     forward: [],
-    block: [],
   };
   let imagesToLoad = 0;
 
-  ["idle", "kick", "punch", "backward", "forward", "block"].forEach(
+  ["idle", "kick", "punch", "backward", "forward"].forEach(
     (animation) => {
       let animationFrames = frames[animation];
       imagesToLoad = imagesToLoad + animationFrames.length;
@@ -104,10 +101,6 @@ loadImages((images) => {
     queuedAnimation.push("forward");
   };
 
-  document.getElementById("Block").onclick = () => {
-    queuedAnimation.push("block");
-  };
-
   document.addEventListener("keyup", (event) => {
     const key = event.key;
 
@@ -119,8 +112,6 @@ loadImages((images) => {
       queuedAnimation.push("forward");
     } else if (key == "ArrowLeft") {
       queuedAnimation.push("backward");
-    } else if (key == "space_bar") {
-      queuedAnimation.push("block");
-    }
+    } 
   });
 });
